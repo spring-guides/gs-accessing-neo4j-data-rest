@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-milestone" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RC3")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'gs-accessing-neo4j-data-rest'
+    version = '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.data:spring-data-neo4j:3.1.0.BUILD-SNAPSHOT")
+    compile("org.hibernate:hibernate-validator:5.0.2.Final")
+    compile("org.springframework.data:spring-data-rest-webmvc:2.0.0.RELEASE")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
