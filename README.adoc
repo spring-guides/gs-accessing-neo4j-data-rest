@@ -78,6 +78,8 @@ This repository is an interface and will allow you to perform various operations
 
 At runtime, Spring Data REST will create an implementation of this interface automatically. Then it will use the http://docs.spring.io/spring-data/rest/docs/{spring_data_rest}/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html[@RepositoryRestResource] annotation to direct Spring MVC to create RESTful endpoints at `/people`.
 
+Here you have also defined a custom query to retrieve a list of `Person` objects based on the lastName. You'll see how to invoke it further down in this guide.
+
 == Make the application executable
 
 Although it is possible to package this service as a traditional link:/understanding/WAR[WAR] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the link:/understanding/Tomcat[Tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
@@ -136,6 +138,9 @@ $ curl http://localhost:8080/people
     "self" : {
       "href" : "http://localhost:8080/people{?page,size,sort}",
       "templated" : true
+    },
+    "search" : {
+      "href" : "http://localhost:8080/people/search"
     }
   },
   "page" : {
@@ -153,9 +158,9 @@ There are currently no elements and hence no pages. Time to create a new `Person
 $ curl -i -X POST -H "Content-Type:application/json" -d '{  "firstName" : "Frodo",  "lastName" : "Baggins" }' http://localhost:8080/people
 HTTP/1.1 201 Created
 Server: Apache-Coyote/1.1
-Location: http://localhost:8080/people/1
+Location: http://localhost:8080/people/0
 Content-Length: 0
-Date: Wed, 26 Feb 2014 20:26:55 GMT
+Date: Mon, 03 Mar 2014 17:28:03 GMT
 ```
 
 - `-i` ensures you can see the response message including the headers. The URI of the newly created `Person` is shown
@@ -172,6 +177,9 @@ $ curl http://localhost:8080/people
     "self" : {
       "href" : "http://localhost:8080/people{?page,size,sort}",
       "templated" : true
+    },
+    "search" : {
+      "href" : "http://localhost:8080/people/search"
     }
   },
   "_embedded" : {
@@ -180,7 +188,7 @@ $ curl http://localhost:8080/people
       "lastName" : "Baggins",
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/people/1"
+          "href" : "http://localhost:8080/people/0"
         }
       }
     } ]
@@ -199,13 +207,13 @@ The **persons** object contains a list with Frodo. Notice how it includes a **se
 You can query directly for the individual record:
 
 ```
-$ curl http://localhost:8080/people/1
+$ curl http://localhost:8080/people/0
 {
   "firstName" : "Frodo",
   "lastName" : "Baggins",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/people/1"
+      "href" : "http://localhost:8080/people/0"
     }
   }
 }
@@ -214,6 +222,43 @@ $ curl http://localhost:8080/people/1
 NOTE: This might appear to be purely web based, but behind the scenes, there is an embedded Neo4j graph database. In production, you would probably connect to a stand alone Neo4j server.
 
 In this guide, there is only one domain object. With a more complex system where domain objects are related to each other, Spring Data REST will render additional links to help navigate to connected records.
+
+Find all the custom queries:
+
+```
+$ curl http://localhost:8080/people/search
+{
+  "_links" : {
+    "findByLastName" : {
+      "href" : "http://localhost:8080/people/search/findByLastName{?name}",
+      "templated" : true
+    }
+  }
+}
+```
+
+You can see the URL for the query including the HTTP query parameter `name`. If you'll notice, this matches the `@Param("name")` annotation embedded in the interface.
+
+To use the `findByLastName` query, do this:
+
+```
+$ curl http://localhost:8080/people/search/findByLastName?name=Baggins
+{
+  "_embedded" : {
+    "persons" : [ {
+      "firstName" : "Frodo",
+      "lastName" : "Baggins",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/people/0"
+        }
+      }
+    } ]
+  }
+}
+```
+
+Because you defined it to return `List<Person` in the code, it will return all of the results. If you had defined it only return `Person`, it will pick one of the Person objects to return. Since this can be unpredictable, you probably don't want to do that for queries that can return multiple entries.
 
 You can also issue PUT, PATCH, and DELETE REST calls to either replace, update, or delete existing records.
 
@@ -225,7 +270,7 @@ $ curl http://localhost:8080/people/1
   "lastName" : "Baggins",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/people/1"
+      "href" : "http://localhost:8080/people/0"
     }
   }
 }
@@ -239,7 +284,7 @@ $ curl http://localhost:8080/people/1
   "lastName" : "Baggins",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/people/1"
+      "href" : "http://localhost:8080/people/0"
     }
   }
 }
@@ -250,13 +295,16 @@ NOTE: PUT replaces an entire record. Fields not supplied will be replaced with n
 You can delete records:
 
 ```
-$ curl -X DELETE http://localhost:8080/people/1
+$ curl -X DELETE http://localhost:8080/people/0
 $ curl http://localhost:8080/people
 {
   "_links" : {
     "self" : {
       "href" : "http://localhost:8080/people{?page,size,sort}",
       "templated" : true
+    },
+    "search" : {
+      "href" : "http://localhost:8080/people/search"
     }
   },
   "page" : {
@@ -267,6 +315,8 @@ $ curl http://localhost:8080/people
   }
 }
 ```
+
+A very convenient aspect of this link:/understanding/HATEOAS[hypermedia-driven interface] is how you can discover all the RESTful endpoints using curl (or whatever REST client you are using). There is no need to exchange a formal contract or interface document with your customers.
 
 == Summary
 
