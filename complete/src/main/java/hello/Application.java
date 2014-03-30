@@ -1,4 +1,3 @@
-
 package hello;
 
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -17,6 +16,10 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 @Import(RepositoryRestMvcConfiguration.class)
 @EnableAutoConfiguration
 public class Application extends Neo4jConfiguration {
+
+	public Application() {
+		setBasePackage("hello");
+	}
 
 	@Bean(destroyMethod = "shutdown")
 	public GraphDatabaseService graphDatabaseService() {
