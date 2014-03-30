@@ -91,7 +91,7 @@ include::complete/src/main/java/hello/Application.java[]
 
 The `main()` method defers to the {SpringApplication}[`SpringApplication`] helper class, providing `Application.class` as an argument to its `run()` method. This tells Spring to read the annotation metadata from `Application` and to manage it as a component in the link:/understanding/application-context[Spring application context].
 
-The `@EnableNeo4jRepositories` annotation activates Spring Data Neo4j. Spring Data Neo4j will create a concrete implementation of the `PersonRepository` and configure it to talk to an embedded Neo4j database using the Cypher query language.
+The `@EnableNeo4jRepositories` annotation activates Spring Data Neo4j. Spring Data Neo4j will create a concrete implementation of the `PersonRepository` and configure it to talk to an embedded Neo4j database using the Cypher query language. Currently you have to provide the mandatory base-package of your entities via a +setBasePackage("hello")+ method call in the configuration constructor.
 
 Spring Data REST is a Spring MVC application. The `@Import(RepositoryRestMvcConfiguration.class)` annotation imports a collection of Spring MVC controllers, JSON converters, and other beans needed to provide a RESTful front end. These components link up to the Spring Data Neo4j backend.
 
