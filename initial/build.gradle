@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.data:spring-data-neo4j:3.1.0.BUILD-SNAPSHOT")
+    compile("org.springframework.data:spring-data-neo4j:3.1.0.M1")
     compile("org.hibernate:hibernate-validator")
     compile("org.springframework.data:spring-data-rest-webmvc")
 }
