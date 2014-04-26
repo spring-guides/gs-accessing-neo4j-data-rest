@@ -153,7 +153,7 @@ There are currently no elements and hence no pages. Time to create a new `Person
 $ curl -i -X POST -H "Content-Type:application/json" -d '{  "firstName" : "Frodo",  "lastName" : "Baggins" }' http://localhost:8080/people
 HTTP/1.1 201 Created
 Server: Apache-Coyote/1.1
-Location: http://localhost:8080/people/1
+Location: http://localhost:8080/people/0
 Content-Length: 0
 Date: Wed, 26 Feb 2014 20:26:55 GMT
 ```
@@ -180,7 +180,7 @@ $ curl http://localhost:8080/people
       "lastName" : "Baggins",
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/people/1"
+          "href" : "http://localhost:8080/people/0"
         }
       }
     } ]
@@ -199,13 +199,13 @@ The **persons** object contains a list with Frodo. Notice how it includes a **se
 You can query directly for the individual record:
 
 ```
-$ curl http://localhost:8080/people/1
+$ curl http://localhost:8080/people/0
 {
   "firstName" : "Frodo",
   "lastName" : "Baggins",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/people/1"
+      "href" : "http://localhost:8080/people/0"
     }
   }
 }
@@ -219,13 +219,13 @@ You can also issue PUT, PATCH, and DELETE REST calls to either replace, update, 
 
 ```
 $ curl -X PUT -H "Content-Type:application/json" -d '{ "firstName": "Bilbo", "lastName": "Baggins" }' http://localhost:8080/people/1
-$ curl http://localhost:8080/people/1
+$ curl http://localhost:8080/people/0
 {
   "firstName" : "Bilbo",
   "lastName" : "Baggins",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/people/1"
+      "href" : "http://localhost:8080/people/0"
     }
   }
 }
@@ -233,13 +233,13 @@ $ curl http://localhost:8080/people/1
 
 ```
 $ curl -X PATCH -H "Content-Type:application/json" -d '{ "firstName": "Bilbo Jr." }' http://localhost:8080/people/1
-$ curl http://localhost:8080/people/1
+$ curl http://localhost:8080/people/0
 {
   "firstName" : "Bilbo Jr.",
   "lastName" : "Baggins",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/people/1"
+      "href" : "http://localhost:8080/people/0"
     }
   }
 }
@@ -250,7 +250,7 @@ NOTE: PUT replaces an entire record. Fields not supplied will be replaced with n
 You can delete records:
 
 ```
-$ curl -X DELETE http://localhost:8080/people/1
+$ curl -X DELETE http://localhost:8080/people/0
 $ curl http://localhost:8080/people
 {
   "_links" : {
