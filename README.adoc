@@ -175,7 +175,7 @@ $ curl http://localhost:8080/people
     }
   },
   "_embedded" : {
-    "persons" : [ {
+    "people" : [ {
       "firstName" : "Frodo",
       "lastName" : "Baggins",
       "_links" : {
@@ -194,7 +194,7 @@ $ curl http://localhost:8080/people
 }
 ```
 
-The **persons** object contains a list with Frodo. Notice how it includes a **self** link. Spring Data REST also uses http://www.atteo.org/2011/12/12/Evo-Inflector.html[Evo Inflector] to pluralize the name of the entity for groupings.
+The **people** object contains a list with Frodo. Notice how it includes a **self** link. Spring Data REST also uses http://www.atteo.org/2011/12/12/Evo-Inflector.html[Evo Inflector] to pluralize the name of the entity for groupings.
 
 You can query directly for the individual record:
 
@@ -218,7 +218,7 @@ In this guide, there is only one domain object. With a more complex system where
 You can also issue PUT, PATCH, and DELETE REST calls to either replace, update, or delete existing records.
 
 ```
-$ curl -X PUT -H "Content-Type:application/json" -d '{ "firstName": "Bilbo", "lastName": "Baggins" }' http://localhost:8080/people/1
+$ curl -X PUT -H "Content-Type:application/json" -d '{ "firstName": "Bilbo", "lastName": "Baggins" }' http://localhost:8080/people/0
 $ curl http://localhost:8080/people/0
 {
   "firstName" : "Bilbo",
@@ -232,7 +232,7 @@ $ curl http://localhost:8080/people/0
 ```
 
 ```
-$ curl -X PATCH -H "Content-Type:application/json" -d '{ "firstName": "Bilbo Jr." }' http://localhost:8080/people/1
+$ curl -X PATCH -H "Content-Type:application/json" -d '{ "firstName": "Bilbo Jr." }' http://localhost:8080/people/0
 $ curl http://localhost:8080/people/0
 {
   "firstName" : "Bilbo Jr.",
