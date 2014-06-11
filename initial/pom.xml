@@ -51,7 +51,7 @@
     <repositories>
         <repository>
             <id>spring-releases</id>
-            <url>http://repo.spring.io/release</url>
+            <url>http://repo.spring.io/libs-release</url>
         </repository>
         <repository>
             <id>spring-milestones</id>
@@ -61,7 +61,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>spring-releases</id>
-            <url>http://repo.spring.io/release</url>
+            <url>http://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
