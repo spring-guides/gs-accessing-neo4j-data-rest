@@ -1,7 +1,6 @@
 buildscript {
     repositories {
         maven { url "http://repo.spring.io/libs-release" }
-        maven { url "http://repo.spring.io/libs-milestone" }
         mavenLocal()
         mavenCentral()
     }
@@ -28,10 +27,9 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.data:spring-data-neo4j:3.1.0.M1")
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("org.springframework.data:spring-data-neo4j")
     compile("org.hibernate:hibernate-validator")
-    compile("org.springframework.data:spring-data-rest-webmvc")
 }
 
 task wrapper(type: Wrapper) {
