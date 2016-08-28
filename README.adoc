@@ -70,6 +70,8 @@ At runtime, Spring Data REST will create an implementation of this interface aut
 
 NOTE: `@RepositoryRestResource` is not required for a repository to be exported. It is only used to change the export details, such as using `/people` instead of the default value of `/persons`.
 
+Here you have also defined a custom query to retrieve a list of `Person` objects based on the lastName. You'll see how to invoke it further down in this guide.
+
 == Make the application executable
 
 Although it is possible to package this service as a traditional link:/understanding/WAR[WAR] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the link:/understanding/Tomcat[Tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
@@ -83,7 +85,7 @@ include::complete/src/main/java/hello/Application.java[]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/spring-boot-application.adoc[]
 
-The `@EnableNeo4jRepositories` annotation activates Spring Data Neo4j. Spring Data Neo4j will create a concrete implementation of the `PersonRepository` and configure it to talk to an embedded Neo4j database using the Cypher query language. Currently you have to provide the mandatory base-package of your entities via a +setBasePackage("hello")+ method call in the configuration constructor.
+The `@EnableNeo4jRepositories` annotation activates Spring Data Neo4j. Spring Data Neo4j will create a concrete implementation of the `PersonRepository` and configure it to talk to an embedded Neo4j database using the Cypher query language.
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
 
@@ -122,6 +124,9 @@ $ curl http://localhost:8080/people
     "self" : {
       "href" : "http://localhost:8080/people{?page,size,sort}",
       "templated" : true
+    },
+    "search" : {
+      "href" : "http://localhost:8080/people/search"
     }
   },
   "page" : {
@@ -145,13 +150,13 @@ Date: Wed, 26 Feb 2014 20:26:55 GMT
 ```
 
 - `-i` ensures you can see the response message including the headers. The URI of the newly created `Person` is shown
-- `-X POST` signals this a POST used to create a new entry
+- `-X POST` signals this a `POST` used to create a new entry
 - `-H "Content-Type:application/json"` sets the content type so the application knows the payload contains a JSON object
 - `-d '{  "firstName" : "Frodo",  "lastName" : "Baggins" }'` is the data being sent
 
 NOTE: Notice how the previous `POST` operation includes a `Location` header. This contains the URI of the newly created resource. Spring Data REST also has two methods on `RepositoryRestConfiguration.setReturnBodyOnCreate(…)` and `setReturnBodyOnCreate(…)` which you can use to configure the framework to immediately return the representation of the resource just created.
 
-From this you can query against for all people:
+From this you can query for all people:
 
 ```
 $ curl http://localhost:8080/people
@@ -160,6 +165,9 @@ $ curl http://localhost:8080/people
     "self" : {
       "href" : "http://localhost:8080/people{?page,size,sort}",
       "templated" : true
+    },
+    "search" : {
+      "href" : "http://localhost:8080/people/search"
     }
   },
   "_embedded" : {
@@ -203,7 +211,23 @@ NOTE: This might appear to be purely web based, but behind the scenes, there is 
 
 In this guide, there is only one domain object. With a more complex system where domain objects are related to each other, Spring Data REST will render additional links to help navigate to connected records.
 
-You can search records by last name.
+Find all the custom queries:
+
+```
+$ curl http://localhost:8080/people/search
+{
+  "_links" : {
+    "findByLastName" : {
+      "href" : "http://localhost:8080/people/search/findByLastName{?name}",
+      "templated" : true
+    }
+  }
+}
+```
+
+You can see the URL for the query including the HTTP query parameter `name`. If you'll notice, this matches the `@Param("name")` annotation embedded in the interface.
+
+To use the `findByLastName` query, do this:
 
 ```
 $ curl http://localhost:8080/people/search/findByLastName?name=Baggins
@@ -230,7 +254,9 @@ $ curl http://localhost:8080/people/search/findByLastName?name=Baggins
 }
 ```
 
-You can also issue PUT, PATCH, and DELETE REST calls to either replace, update, or delete existing records.
+Because you defined it to return `List<Person>` in the code, it will return all of the results. If you had defined it only return `Person`, it will pick one of the Person objects to return. Since this can be unpredictable, you probably don't want to do that for queries that can return multiple entries.
+
+You can also issue `PUT`, `PATCH`, and `DELETE` REST calls to either replace, update, or delete existing records.
 
 ```
 $ curl -X PUT -H "Content-Type:application/json" -d '{ "firstName": "Bilbo", "lastName": "Baggins" }' http://localhost:8080/people/0
@@ -260,7 +286,7 @@ $ curl http://localhost:8080/people/0
 }
 ```
 
-NOTE: PUT replaces an entire record. Fields not supplied will be replaced with null. PATCH can be used to update a subset of items.
+NOTE: `PUT` replaces an entire record. Fields not supplied will be replaced with `null`. `PATCH` can be used to update a subset of items.
 
 You can delete records:
 
@@ -272,6 +298,9 @@ $ curl http://localhost:8080/people
     "self" : {
       "href" : "http://localhost:8080/people{?page,size,sort}",
       "templated" : true
+    },
+    "search" : {
+      "href" : "http://localhost:8080/people/search"
     }
   },
   "page" : {
@@ -282,6 +311,8 @@ $ curl http://localhost:8080/people
   }
 }
 ```
+
+A very convenient aspect of this link:/understanding/HATEOAS[hypermedia-driven interface] is how you can discover all the RESTful endpoints using curl (or whatever REST client you are using). There is no need to exchange a formal contract or interface document with your customers.
 
 == Summary
 
