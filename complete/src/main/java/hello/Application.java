@@ -1,29 +1,17 @@
-package hello;
 
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+package hello;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
-import org.springframework.data.neo4j.config.Neo4jConfiguration;
+import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication
+@EnableTransactionManagement
 @EnableNeo4jRepositories
-public class Application extends Neo4jConfiguration {
-
-	public Application() {
-		setBasePackage("hello");
-	}
-
-	@Bean(destroyMethod = "shutdown")
-	public GraphDatabaseService graphDatabaseService() {
-		return new GraphDatabaseFactory().newEmbeddedDatabase("target/hello.db");
-	}
+@SpringBootApplication
+public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-
 }
