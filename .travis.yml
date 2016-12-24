@@ -1,5 +1,7 @@
-sudo: false
+sudo: required
 language: java
+services:
+  - neo4j
 jdk:
 - oraclejdk8
 script:
