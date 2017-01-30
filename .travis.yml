@@ -2,10 +2,12 @@ sudo: required
 language: java
 services:
   - neo4j
+env:
+  - spring.data.neo4j.password=secret
 jdk:
-- oraclejdk8
+  - oraclejdk8
 script:
-- test/run.sh
+  - test/run.sh
 notifications:
   slack:
     secure: j2oDWgnZm02HH+hYLLR7h0WEnQmZzxu5ldmjfNomI1ffuQdkdoWwuVJ4+/t3pUAYGrRwIqe0o+qQhdLIipjTiO/ATTTx+x5qua24qU3xjQiXi9G9TLqDWmRTuzOTdrB8hDjyb1Bhg9+wjdOPlU1phFYr8gYNrSlary+xbkT4cEk=
