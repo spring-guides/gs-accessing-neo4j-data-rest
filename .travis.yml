@@ -2,8 +2,6 @@ sudo: false
 language: java
 services:
   - neo4j
-env:
-  - SPRING_DATA_NEO4J_PASSWORD=neo4j
 before_script:
   - curl -v -u neo4j:neo4j -X POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"
 jdk:
