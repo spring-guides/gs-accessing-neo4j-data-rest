@@ -3,7 +3,7 @@ language: java
 services:
   - neo4j
 env:
-  - spring.data.neo4j.password=secret
+  - SPRING_DATA_NEO4J_PASSWORD=neo4j
 jdk:
   - oraclejdk8
 script:
