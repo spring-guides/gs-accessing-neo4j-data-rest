@@ -7,7 +7,7 @@ before_install:
   - tar -xzf neo4j-community-${NEO4J_VERSION}-unix.tar.gz
   - neo4j-community-${NEO4J_VERSION}/bin/neo4j start
 before_script:
-  - neo4j-community-3.1.1/bin/neo4j-admin set-initial-password secret
+  - neo4j-community-${NEO4J_VERSION}/bin/neo4j-admin set-initial-password secret
 jdk:
   - oraclejdk8
 script:
