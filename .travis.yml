@@ -7,7 +7,7 @@ before_install:
   - tar -xzf neo4j-community-${NEO4J_VERSION}-unix.tar.gz
   - neo4j-community-${NEO4J_VERSION}/bin/neo4j start
 before_script:
-  - neo4j-community-${NEO4J_VERSION}/bin/neo4j-admin set-initial-password secret
+  - curl -v -u neo4j:neo4j -X POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"
 jdk:
   - oraclejdk8
 script:
