@@ -17,7 +17,7 @@ This guide walks you through the process of creating an application that accesse
 graph-based data through a link:/guides/gs/rest-hateoas[hypermedia-based] RESTful front
 end.
 
-== What You Will build
+== What You Will Build
 
 You will build a Spring application that lets you create and retrieve `Person` objects
 that are stored in a http://www.neo4j.org/[Neo4j] NoSQL database by using Spring Data
@@ -31,14 +31,14 @@ link:/guides/gs/accessing-gemfire-data-rest[Spring Data Gemfire], and
 link:/guides/gs/accessing-mongodb-data-rest[Spring Data MongoDB] as backend data stores,
 but this guide deals with Neo4j.
 
-== What You need
+== What You Need
 
 :java_version: 1.8
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
-== Standing up a Neo4j server
+== Standing up a Neo4j Server
 
 Before you can build a this application, you need to set up a Neo4j server.
 
