@@ -1,5 +1,5 @@
 
-package hello;
+package com.example.accessingneo4jdatarest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableNeo4jRepositories
 @SpringBootApplication
-public class Application {
+public class AccessingNeo4jDataRestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(AccessingNeo4jDataRestApplication.class, args);
 	}
 }

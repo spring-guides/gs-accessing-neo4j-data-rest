@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello;
+package com.example.accessingneo4jdatarest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Import(Neo4jDataAutoConfiguration.class)
-public class ApplicationTests {
+public class AccessingNeo4jDataRestApplicationTests {
 
 	@Autowired
 	private MockMvc mockMvc;
