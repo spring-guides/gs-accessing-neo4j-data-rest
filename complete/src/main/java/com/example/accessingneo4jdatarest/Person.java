@@ -1,4 +1,4 @@
-package hello;
+package com.example.accessingneo4jdatarest;
 
 
 import org.neo4j.ogm.annotation.GeneratedValue;
