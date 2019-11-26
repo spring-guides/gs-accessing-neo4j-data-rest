@@ -146,7 +146,7 @@ You need to create a new domain object to present a person, as the following exa
 `src/main/java/com/example/accessingneo4jdatarest/Person.java`) shows:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/accessingneo4jdatarest/Person.java[]
 ----
@@ -161,7 +161,7 @@ Next, you need to create a simple repository, as the following example (in
 `src/main/java/com/example/accessingneo4jdatarest/PersonRepository.java`) shows:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/accessingneo4jdatarest/PersonRepository.java[]
 ----
@@ -193,7 +193,7 @@ adds it to `Application` to create the application case name. In this case, we g
 `AccessingNeo4jDataRestApplication`, as the following listing shows:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/accessingneo4jdatarest/AccessingNeo4jDataRestApplication.java[]
 ----
