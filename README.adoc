@@ -95,6 +95,7 @@ Repositories and Spring Data Neo4j dependencies.
 
 You can follow this https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.1.9.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=accessing-neo4j-data-rest&name=accessing-neo4j-data-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.accessing-neo4j-data-rest&dependencies=data-neo4j,data-rest[link] to create the project skeleton.
 
+You can get a Maven build file with the necessary dependencies directly from the https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.4.2.RELEASE&packaging=jar&jvmVersion=11&groupId=com.example&artifactId=accessing-neo4j-data-rest&name=accessing-neo4j-data-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.accessing-neo4j-data-rest&dependencies=data-rest,data-neo4j[Spring Initializr].
 The following listing shows the `pom.xml` file created when you choose Maven:
 
 ====
@@ -104,6 +105,7 @@ include::complete/pom.xml[]
 ----
 ====
 
+You can get a Gradle build file with the necessary dependencies directly from the https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.4.2.RELEASE&packaging=jar&jvmVersion=11&groupId=com.example&artifactId=accessing-neo4j-data-rest&name=accessing-neo4j-data-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.accessing-neo4j-data-rest&dependencies=data-rest,data-neo4j[Spring Initializr].
 The following listing shows the `build.gradle` file created when you choose Gradle:
 
 ====

@@ -34,7 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Import(Neo4jDataAutoConfiguration.class)
 public class AccessingNeo4jDataRestApplicationTests {
 
 	@Autowired

@@ -1,11 +1,10 @@
 package com.example.accessingneo4jdatarest;
 
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-
-@NodeEntity
+@Node
 public class Person {
 
 	@Id @GeneratedValue private Long id;
