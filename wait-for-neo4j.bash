@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 end="$((SECONDS+30))"
 while true; do

@@ -36,7 +36,8 @@ pipeline {
 			}
 			options { timeout(time: 30, unit: 'MINUTES') }
 			steps {
-				sh '/neo4j-community-installed//bin/neo4j start &'
+				sh '/neo4j-community-installed/bin/neo4j start &'
+				sh 'sleep 1'
 				sh './wait-for-neo4j.bash'
 				sh 'curl -v -u neo4j:neo4j -X POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"'
 				sh 'test/run.sh'
