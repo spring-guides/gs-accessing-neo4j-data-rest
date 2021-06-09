@@ -10,4 +10,3 @@ ARG NEO4J_VERSION=3.1.1
 RUN wget https://dist.neo4j.org/neo4j-community-${NEO4J_VERSION}-unix.tar.gz
 RUN tar -xzf neo4j-community-${NEO4J_VERSION}-unix.tar.gz
 RUN mv neo4j-community-${NEO4J_VERSION} neo4j-community-installed
-RUN chown -R 1001:1001 /neo4j-community-installed

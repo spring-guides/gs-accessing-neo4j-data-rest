@@ -19,7 +19,7 @@ pipeline {
 
 			steps {
 				script {
-					def image = docker.build("springci/gs-accessing-neo4j-data-rest-openjdk8-with-neo4j", "ci/")
+					def image = docker.build("springci/gs-accessing-neo4j-data-rest-neo4j-with-tools", "ci/")
 					docker.withRegistry('', 'hub.docker.com-springbuildmaster') {
 						image.push()
 					}
@@ -30,17 +30,29 @@ pipeline {
 		stage("test: baseline (jdk8)") {
 			agent {
 				docker {
-					image 'springci/gs-accessing-neo4j-data-rest-openjdk8-with-neo4j:latest'
+					image 'springci/gs-accessing-neo4j-data-rest-neo4j-with-tools:latest'
 					args '-v $HOME/.m2:/tmp/jenkins-home/.m2'
 				}
 			}
 			options { timeout(time: 30, unit: 'MINUTES') }
+
+			environment {
+				DOCKER_HUB = credentials('hub.docker.com-springbuildmaster')
+			}
+
 			steps {
-				sh '/neo4j-community-installed/bin/neo4j start &'
-				sh 'sleep 1'
-				sh './wait-for-neo4j.bash'
-				sh 'curl -v -u neo4j:neo4j -X POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"'
-				sh 'test/run.sh'
+				script {
+					docker.withRegistry('', 'hub.docker.com-springbuildmaster') {
+						docker.image('springci/gs-accessing-neo4j-data-rest-neo4j-with-tools:latest').inside('-u root -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v $HOME:/tmp/jenkins-home') {
+							sh "docker login --username ${DOCKER_HUB_USR} --password ${DOCKER_HUB_PSW}"
+							sh '/neo4j-community-installed/bin/neo4j start &'
+							sh 'sleep 1'
+							sh './wait-for-neo4j.bash'
+							sh 'curl -v -u neo4j:neo4j -X POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"'
+							sh 'test/run.sh'
+						}
+					}
+				}
 			}
 		}
 
