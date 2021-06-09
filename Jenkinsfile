@@ -29,10 +29,7 @@ pipeline {
 
 		stage("test: baseline (jdk8)") {
 			agent {
-				docker {
-					image 'springci/gs-accessing-neo4j-data-rest-neo4j-with-tools:latest'
-					args '-v $HOME/.m2:/tmp/jenkins-home/.m2'
-				}
+				label 'data'
 			}
 			options { timeout(time: 30, unit: 'MINUTES') }
 
