@@ -79,7 +79,7 @@ that the new account password be changed. To do so, run the following command:
 
 ====
 ----
-$ curl -v -u neo4j:neo4j -X POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"
+$ neo4j-admin set-initial-password secret
 ----
 ====
 
