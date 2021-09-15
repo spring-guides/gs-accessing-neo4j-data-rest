@@ -79,7 +79,7 @@ that the new account password be changed. To do so, run the following command:
 
 ====
 ----
-$ curl -v -u neo4j:neo4j -X POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"
+$ curl -v -u neo4j:neo4j POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"
 ----
 ====
 
@@ -88,32 +88,7 @@ With that completed, you should be ready to run this guide.
 
 == Starting with Spring Initializr
 
-
-If you use Maven, visit the https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.4.3.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=accessing-neo4j-data-rest&name=accessing-neo4j-data-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.accessing-neo4j-data-rest&dependencies=data-rest,data-neo4j[Spring Initializr] to generate a new project with the required dependencies (Rest Repositories and Spring Data Neo4j).
-
-The following listing shows the `pom.xml` file created when you choose Maven:
-
-====
-[src,xml]
-----
-include::complete/pom.xml[]
-----
-====
-
-If you use Gradle, visit the https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.4.3.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=accessing-neo4j-data-rest&name=accessing-neo4j-data-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.accessing-neo4j-data-rest&dependencies=data-rest,data-neo4j[Spring Initializr] to generate a new project with the required dependencies (Rest Repositories and Spring Data Neo4j).
-
-The following listing shows the `build.gradle` file created when you choose Gradle:
-
-====
-[src,groovy]
-----
-include::complete/build.gradle[]
-----
-====
-
-=== Manual Initialization (optional)
-
-If you want to initialize the project manually rather than use the links shown earlier, follow the steps given below:
+To initialize the project:
 
 . Navigate to https://start.spring.io.
 This service pulls in all the dependencies you need for an application and does most of the setup for you.
@@ -123,6 +98,8 @@ This service pulls in all the dependencies you need for an application and does 
 . Download the resulting ZIP file, which is an archive of a web application that is configured with your choices.
 
 NOTE: If your IDE has the Spring Initializr integration, you can complete this process from your IDE.
+
+NOTE: You can also fork the project from Github and open it in your IDE or other editor.
 
 [[initial]]
 == Permissions to Access Neo4j
