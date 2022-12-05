@@ -11,7 +11,7 @@ pipeline {
 	}
 
 	stages {
-		stage('Publish OpenJDK 8 + Neo4j') {
+		stage('Publish OpenJDK 17 + Neo4j') {
 			when {
 				changeset "ci/Dockerfile"
 			}
@@ -27,7 +27,7 @@ pipeline {
 			}
 		}
 
-		stage("test: baseline (jdk8)") {
+		stage("test: baseline (jdk17)") {
 			agent {
 				label 'data'
 			}
