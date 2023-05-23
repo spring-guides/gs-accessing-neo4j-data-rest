@@ -87,7 +87,7 @@ With that completed, you should be ready to run this guide.
 
 == Starting with Spring Initializr
 
-You can use this https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.1&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=accessing-neo4j-data-rest&name=accessing-neo4j-data-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.accessing-neo4j-data-rest&dependencies=data-rest,data-neo4j[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
+You can use this https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.1.0&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=accessing-neo4j-data-rest&name=accessing-neo4j-data-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.accessing-neo4j-data-rest&dependencies=data-rest,data-neo4j[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
 
 To manually initialize the project:
 
