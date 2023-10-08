@@ -1,0 +1,50 @@
+# curl http://localhost:8080
+GET http://localhost:8080
+
+###
+
+# curl http://localhost:8080/people
+GET http://localhost:8080/people
+
+###
+
+# curl -i -X POST -H "Content-Type:application/json" -d '{  "firstName" : "Frodo",  "lastName" : "Baggins" }' http://localhost:8080/people
+POST http://localhost:8080/people
+Content-Type: application/json
+
+{
+  "firstName": "Frodo",
+  "lastName": "Baggins"
+}
+
+###
+
+# curl http://localhost:8080/people/0
+GET http://localhost:8080/people/0
+
+###
+
+# curl http://localhost:8080/people/search
+GET http://localhost:8080/people/search
+
+###
+
+# curl http://localhost:8080/people/search/findByLastName?name=Baggins
+GET http://localhost:8080/people/search/findByLastName?name=Baggins
+
+###
+
+# curl -X PATCH -H "Content-Type:application/json" -d '{ "firstName": "Bilbo Jr." }' http://localhost:8080/people/0
+PATCH http://localhost:8080/people/0
+Content-Type: application/json
+
+{
+  "firstName": "Bilbo Jr."
+}
+
+###
+
+# curl -X DELETE http://localhost:8080/people/0
+DELETE http://localhost:8080/people/0
+
+###
