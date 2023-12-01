@@ -1,17 +1,8 @@
-:spring_version: current
 :spring_data_rest: current
 :spring_data_commons: current
-:spring_boot_version: 3.0.1
-:Component: https://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/stereotype/Component.html
-:Controller: https://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/stereotype/Controller.html
-:DispatcherServlet: https://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/web/servlet/DispatcherServlet.html
-:SpringApplication: https://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
-:ResponseBody: https://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/web/bind/annotation/ResponseBody.html
-:EnableAutoConfiguration: https://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/autoconfigure/EnableAutoConfiguration.html
 :toc:
 :icons: font
 :source-highlighter: prettify
-:project_id: gs-accessing-neo4j-data-rest
 
 This guide walks you through the process of creating an application that accesses
 graph-based data through a link:/guides/gs/rest-hateoas[hypermedia-based] RESTful front
