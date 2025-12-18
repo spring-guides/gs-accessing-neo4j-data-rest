@@ -69,11 +69,11 @@ that the new account password be changed. To do so, run the following command:
 
 ====
 ----
-$ curl -v -u neo4j:neo4j POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"secret\"}"
+$ curl -v -u neo4j:neo4j POST localhost:7474/user/neo4j/password -H "Content-type:application/json" -d "{\"password\":\"a_strong_password\"}"
 ----
 ====
 
-This changes the password from `neo4j` to `secret` (something to NOT DO in production!)
+This changes the password from `neo4j` to `a_strong_password` (certainly use a real password!)
 With that completed, you should be ready to run this guide.
 
 == Starting with Spring Initializr
@@ -107,7 +107,7 @@ include::complete/src/main/resources/application.properties[]
 ----
 ====
 
-This includes the default username (`neo4j`) and the newly set password (`secret`) that
+This includes the default username (`neo4j`) and the newly set password (`a_strong_password`) that
 you set earlier.
 
 WARNING: Do NOT store real credentials in your source repository. Instead, configure them
