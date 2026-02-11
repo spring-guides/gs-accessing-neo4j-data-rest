@@ -1,13 +1,16 @@
 package com.example.accessingneo4jdatarest;
 
+import org.jspecify.annotations.Nullable;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
 
 @Node
 public class Person {
 
-	@Id @GeneratedValue private Long id;
+	@Id
+	@GeneratedValue
+	private @Nullable Long id;
 
 	private String firstName;
 	private String lastName;
